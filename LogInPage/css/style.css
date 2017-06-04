@@ -1,0 +1,93 @@
+.myform {
+		margin: 0px;
+	}
+
+.header {
+  width:50%;
+  text-align: center;
+}
+
+.form {
+  position: relative;
+  padding: 40px;
+  width: 400px;
+  margin: 40px auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+	font-family: 'Asap', sans-serif;
+  background: #F9E79F;
+  text-align: center;
+  height: 500px;
+  vertical-align: middle;
+
+}
+
+
+.inputvalues {
+	width:300px;
+	padding: 10px;
+}
+
+.inputvalues:focus{
+	background: #FCF3CF;
+}
+
+#btn {	
+ 	font-family: 'Asap', sans-serif;
+ 	width:200px;
+ 	padding: 10px;
+ 	font-weight: bold;
+ 	background-color: #F39C12;
+ 	border-radius: 50px;
+ 	font-size:20px;
+ }
+
+/* Home page */
+
+.myButton1 {
+  font-family: 'Asap', sans-serif;
+background-image: url("imgs/1.jpeg");
+color:white;
+font-weight: bold;
+width:400px;
+height: 25%;
+font-size:20px;
+text-transform: uppercase;
+text-align: left;
+  }
+
+  .myButton2 {
+  font-family: 'Asap', sans-serif;
+background-image: url(imgs/2.jpeg);
+color:white;
+font-weight: bold;
+width:400px;
+height: 25%;
+font-size:20px;
+text-transform: uppercase;
+text-align: left;
+  }
+
+  .myButton3 {
+  font-family: 'Asap', sans-serif;
+background-image: url(imgs/3.jpeg);
+background-size: 100%;
+color:white;
+font-weight: bold;
+width:400px;
+height: 25%;
+font-size:20px;
+text-transform: uppercase;
+text-align: left;
+}
+
+  .myButton4 {
+  font-family: 'Asap', sans-serif;  
+background-image: url(imgs/4.jpeg);
+background-size: 100%;
+color:white;width:400px;
+height: 25%;
+font-size:20px;
+text-transform: uppercase;
+text-align: left;
+  }
