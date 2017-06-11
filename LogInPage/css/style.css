@@ -2,10 +2,6 @@
 		margin: 0px;
 	}
 
-.header {
-  width:50%;
-  text-align: center;
-}
 
 .form {
   position: relative;
@@ -18,8 +14,8 @@
   background: #F9E79F;
   text-align: center;
   height: 500px;
-  vertical-align: middle;
-
+  vertical-align: middle;  
+  overflow: scroll;
 }
 
 

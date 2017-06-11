@@ -1,6 +1,7 @@
 <?php 
 
 session_start();
+require 'DBconfig/config.php';
 
  ?>
 
@@ -16,12 +17,14 @@ session_start();
  <body>
             <!-- If possible, address by name i.e Welcome [name]-->
 <div class="form">
-<a href="http://google.com"> <input type="submit" value="View Listings" class="myButton1"/> </a>
-<a href="http://google.com"> <input type="submit" value="My Listings" class="myButton2"/> </a>
-<a href="http://google.com"> <input type="submit" value="My Requests" class="myButton3"/> </a>
+<a href=listings.php> <input type="submit" value="View Listings" class="myButton1"/> </a>
+<a href=mylistings.php> <input type="submit" value="My Listings" class="myButton2"/> </a>
+<a href=myrequests.php> <input type="submit" value="My Requests" class="myButton3"/> </a>
 <a href="http://google.com"> <input type="submit" value="My Messages" class="myButton4"/> </a>
+
     <form class="myform" action="homepage.php" method="post">
      <input name="logout" type="submit" id="btn" value="Log out"/>
+     <br>
      </form>
 
      </div>

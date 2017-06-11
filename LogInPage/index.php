@@ -1,6 +1,6 @@
 <?php 
-session_start();
 require 'DBconfig/config.php';
+session_start();
  ?>
 
  <!DOCTYPE html>
@@ -16,8 +16,6 @@ require 'DBconfig/config.php';
  <body>
  <form class="myform" action="index.php" method="post">
       
-  <div class="header">
-  </div>
 
   <div class="form">
 
@@ -26,7 +24,7 @@ require 'DBconfig/config.php';
 
 
           <form action="/" method="post">
-            <input name="email" type="text" class="inputvalues" placeholder="Email" required/><br>
+            <input name="email" type="email" class="inputvalues" placeholder="Email" required/><br>
             <input name="password" type="password" class="inputvalues" placeholder="Password" required/><br>   <br>
 
           <input name="login" type="submit" id="btn" value="Log in!"/>
@@ -46,7 +44,7 @@ require 'DBconfig/config.php';
 
           if (mysqli_num_rows($query_run)>0) {
             //if the user and password set exist in the current database
-            $_SESSION['username']=$username;
+            $_SESSION['email']=$email;
             header('location:homepage.php');
 
           }

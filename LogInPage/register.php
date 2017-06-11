@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require 'DBconfig/config.php';
  ?>
 
@@ -23,7 +24,7 @@ require 'DBconfig/config.php';
 
             <input name="name" type="text" class="inputvalues" placeholder="Name" required /><br>
             <input name="orgname" type="text" class="inputvalues" placeholder="Organization Name" required/><br>          
-            <input name="email" type="text" class="inputvalues" placeholder="Organization Email" required/><br>        
+            <input name="email" type="email" class="inputvalues" placeholder="Organization Email" required/><br>        
              <!--Check if can store email instead-->
             <input name="password" type="password" class="inputvalues" placeholder="Password" required /><br>
             <input name="cpassword" type="password" class="inputvalues" placeholder="Confirm Password" required /><br><br>
