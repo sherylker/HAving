@@ -49,14 +49,24 @@ echo "<td>" . $row['expdate'] . "</td>";
 echo "<td>" . $row['location'] . "</td>";
 echo "<td>" . $row['time'] . "</td>";
 echo "<td>"
-?>
+?> 
+
+    
   <form name="form" method="POST" action="listings.php">
+  <input type = "number" class="inputvalues" name = "quantity_req" placeholder = "20" size="1px"> </br>
      <input type="submit"  value="Grab" name="<?php echo $tmp;?>">
    </form>
 
+    
+    <?php
+    echo "</td>";
+?>
+ 
+
 <?php
    if (isset($_POST[$tmp])) {
-   	$query= "insert into requesttable values( '$supplier', '$requester', '$tmp')";
+   	$quantity_req=$_POST['quantity_req'];
+   	$query= "insert into requesttable values( '$supplier', '$requester', '$tmp', '$quantity_req', 'Pending')";
     $query_run = mysqli_query($con, $query);
 	}
 ?>
@@ -74,6 +84,7 @@ mysqli_close($con);
 	<br><br>
   <a href=createpost.php> <input type="button" id="btn" value="Add a listing!"/> </a>          
   <a href=homepage.php> <input type="button" id="btn" value="Back"/> </a>
+
 
 
 </div>

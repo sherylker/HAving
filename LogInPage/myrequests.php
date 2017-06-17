@@ -20,18 +20,23 @@ require 'DBconfig/config.php';
   <?php 
 
     $email=$_SESSION['email'];
-	$result = mysqli_query($con,"SELECT posttable.ID, posttable.type FROM requesttable, posttable WHERE requesttable.postid = posttable.ID AND requesttable.requester = '$email'");
+	$result = mysqli_query($con,"SELECT posttable.ID, posttable.type, requesttable.quantity_req, requesttable.status FROM requesttable, posttable WHERE requesttable.postid = posttable.ID AND requesttable.requester = '$email'");
 
 echo "<table border='1'>
 <tr>
 <th>ID</th>
 <th>Type</th>
+<th>Quantity</th>
+<th>Status</th>
 </tr>";
 
 while($row = mysqli_fetch_array($result)){
 echo "<tr>";
 echo "<td>" . $row['ID'] . "</td>";
 echo "<td>" . $row['type'] . "</td>";
+echo "<td>" . $row['quantity_req'] . "</td>";
+echo "<td>" . $row['status'] . "</td>";
+
 echo "</tr>";
 }
 echo "</table>";

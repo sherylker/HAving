@@ -23,7 +23,7 @@ require 'DBconfig/config.php';
   <h3> Type of item: </h3>
   <input type= "text" class="inputvalues" name = "type" size = "50" placeholder = "Canned food, mattress etc..."> </br>
   <h3> Description: </h3>
-  <input style="word-break: break-word" class="inputvalues" type = "text" name = "description" wrap = "soft" size = "80 100" placeholder = "Indicate the brand, if it's halal (for food), description..."> </br>
+  <input class="inputvalues" type = "text" name = "description" wrap = "soft" size = "80 100" placeholder = "Indicate the brand, if it's halal (for food), description..."> </br>
   <h3> Quantity: </h3>
   <input type = "number" class="inputvalues" name = "quantity" placeholder = "20"> </br>
   <h3> Expiry date (if applicable): </h3>
