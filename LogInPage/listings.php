@@ -53,7 +53,7 @@ echo "<td>"
 
     
   <form name="form" method="POST" action="listings.php">
-  <input type = "number" class="inputvalues" name = "quantity_req" placeholder = "20" size="1px"> </br>
+  <input type = "number" class="inputvalues" name = "quantity_req" placeholder = "20" id="reqamount"> </br>
      <input type="submit"  value="Grab" name="<?php echo $tmp;?>">
    </form>
 
@@ -66,7 +66,8 @@ echo "<td>"
 <?php
    if (isset($_POST[$tmp])) {
    	$quantity_req=$_POST['quantity_req'];
-   	$query= "insert into requesttable values( '$supplier', '$requester', '$tmp', '$quantity_req', 'Pending')";
+	$query= "insert into requesttable (`supplier`, `requester`, `postid`, `quantity_req`,
+        `status`) values( '$supplier', '$requester', '$tmp', '$quantity_req', 'Pending')";
     $query_run = mysqli_query($con, $query);
 	}
 ?>

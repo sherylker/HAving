@@ -34,53 +34,65 @@ echo "<table border='1'>
 
 while($row = mysqli_fetch_array($result)){
 
-$tmp=$row['ID'];
+$postid=$row['ID'];
 echo "<tr>";
 echo "<td>" . $row['type'] . "</td>";
 // echo "<td>" . $row['description'] . "</td>";
 echo "<td>" . $row['quantity'] . "</td>";
 // echo "<td>" . $row['expdate'] . "</td>";
-echo "<td>" . $row['location'] . "</td>";
-echo "<td>" . $row['time'] . "</td>";
+// echo "<td>" . $row['location'] . "</td>";
+// echo "<td>" . $row['time'] . "</td>";
 echo "<td>";
 
-$result_2 = mysqli_query($con, "SELECT * FROM requesttable where postid='$tmp'");
-
+$result_2 = mysqli_query($con, "SELECT * FROM requesttable where postid='$postid'");
 while ($row_2 = mysqli_fetch_array($result_2)){	
-echo $row_2['requester'];?> , <?php
+echo $row_2['requester'];?>,<?php
+echo $row_2['status'];?>,<?php
 echo $row_2['quantity_req'];
-?>  </br>
+
+$reqid=$row_2['reqid'];
+$approve='approve' . $reqid;
+$decline='decline' . $reqid;
+?> 
 <form action="mylistings.php" method="post">
-<input type= "submit" value="Approve" name= "approve"> </br>
-<input type= "submit" value="Decline" name= "decline"> </br>
+<input type= "submit" value="Approve" name= "<?php echo $approve;?>"> <!-- tmp is the id for the row -->
+<input type= "submit" value="Decline" name= "<?php echo $decline;?>"> </br>
 </form>
 <?php
-		// if (isset($_POST['approve'])) {			  
-		// 	$result_3 = mysqli_query($con,"SELECT * FROM posttable where ID='$tmp'");
-		// 	$row_3=mysqli_fetch_array($result_3);
 
-		//     $new_quantity= ($row['quantity'] - $row_2['quantity_req']);
+		//If the approved button is clicked
 
-		//     if ($new_quantity<=0) {
-		// 	$result_4 = mysqli_query($con,"DELETE * FROM posttable where ID='$tmp'");	
-		// 	$row_4=mysqli_fetch_array($result_4);
+		if (isset($_POST[$approve])) {	
+			$reqid=substr($approve, 7);
+			$result_3 = mysqli_query($con, "SELECT * FROM requesttable where reqid='$reqid'");
+			$row_3 = mysqli_fetch_array($result_3);
 
+		    $new_quantity= ($row['quantity'] - $row_3['quantity_req']);
 
-		//     }
+		    $update_qty = "UPDATE posttable SET quantity='$new_quantity' WHERE ID='$postid'";
+		    $update_status = "UPDATE requesttable SET status='Approved' WHERE reqid='$reqid'";
 
-		//     else{
-		//     $sql = "UPDATE posttable SET quantity='$new_quantity' WHERE ID='$tmp'";
-		//     $result_5=mysqli_query($con, $sql);
-		// }
+		    mysqli_query($con, $update_qty);
+		    mysqli_query($con, $update_status);		
 		
-		//     echo "<meta http-equiv='refresh' content='0;url=mylistings.php'>";
+		    echo "<meta http-equiv='refresh' content='0;url=mylistings.php'>";
 
-		// }
+		}
+
+		if (isset($_POST[$decline])) {
+			$reqid=substr($decline, 7);
+			$update_status = "UPDATE requesttable SET status='Declined' WHERE reqid='$reqid'";
+		    mysqli_query($con, $update_status);	
+
+		    echo "<meta http-equiv='refresh' content='0;url=mylistings.php'>";
+
+		}
+
+
 
 }
 echo "</td>"; 
 echo "<td>"; 
-
 ?>
 
 <a href='edit.php?edit=<?php echo $row['ID'];?>'>edit</a>
@@ -90,7 +102,6 @@ echo "</td>";
 echo "</tr>";
 }
 echo "</table>";
-
 mysqli_close($con);
 ?>
 
