@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require 'DBconfig/config.php';
  ?>
@@ -17,7 +17,7 @@ require 'DBconfig/config.php';
   <div class="form">
 
 
-  <?php 
+  <?php
 
     $email=$_SESSION['email'];
 	$result = mysqli_query($con,"SELECT * FROM posttable where email='$email'");
@@ -25,11 +25,14 @@ require 'DBconfig/config.php';
 echo "<table border='1'>
 <tr>
 <th>Type</th>
+<th>Description</th>
 <th>Quantity</th>
+<th> Expdate </th>
 <th>Location</th>
 <th>Time</th>
 <th>Interested Parties </th>
 <th>Edit</th>
+<th>Delete</th>
 </tr>";
 
 while($row = mysqli_fetch_array($result)){
@@ -37,32 +40,33 @@ while($row = mysqli_fetch_array($result)){
 $postid=$row['ID'];
 echo "<tr>";
 echo "<td>" . $row['type'] . "</td>";
-// echo "<td>" . $row['description'] . "</td>";
+echo "<td>" . $row['description'] . "</td>";
 echo "<td>" . $row['quantity'] . "</td>";
-// echo "<td>" . $row['expdate'] . "</td>";
-// echo "<td>" . $row['location'] . "</td>";
-// echo "<td>" . $row['time'] . "</td>";
+echo "<td>" . $row['expdate'] . "</td>";
+echo "<td>" . $row['location'] . "</td>";
+echo "<td>" . $row['time'] . "</td>";
 echo "<td>";
 
 $result_2 = mysqli_query($con, "SELECT * FROM requesttable where postid='$postid'");
-while ($row_2 = mysqli_fetch_array($result_2)){	
+if (mysqli_fetch_array($result_2)){
+while ($row_2 = mysqli_fetch_array($result_2)){
 echo $row_2['requester'];?>,<?php
 echo $row_2['status'];?>,<?php
-echo $row_2['quantity_req'];
+echo $row_2['quantity_req'];?>,<?php
+echo $row_2['time_req'];
 
 $reqid=$row_2['reqid'];
 $approve='approve' . $reqid;
 $decline='decline' . $reqid;
-?> 
+?>
 <form action="mylistings.php" method="post">
 <input type= "submit" value="Approve" name= "<?php echo $approve;?>"> <!-- tmp is the id for the row -->
 <input type= "submit" value="Decline" name= "<?php echo $decline;?>"> </br>
 </form>
 <?php
-
 		//If the approved button is clicked
 
-		if (isset($_POST[$approve])) {	
+		if (isset($_POST[$approve])) {
 			$reqid=substr($approve, 7);
 			$result_3 = mysqli_query($con, "SELECT * FROM requesttable where reqid='$reqid'");
 			$row_3 = mysqli_fetch_array($result_3);
@@ -73,8 +77,8 @@ $decline='decline' . $reqid;
 		    $update_status = "UPDATE requesttable SET status='Approved' WHERE reqid='$reqid'";
 
 		    mysqli_query($con, $update_qty);
-		    mysqli_query($con, $update_status);		
-		
+		    mysqli_query($con, $update_status);
+
 		    echo "<meta http-equiv='refresh' content='0;url=mylistings.php'>";
 
 		}
@@ -82,22 +86,40 @@ $decline='decline' . $reqid;
 		if (isset($_POST[$decline])) {
 			$reqid=substr($decline, 7);
 			$update_status = "UPDATE requesttable SET status='Declined' WHERE reqid='$reqid'";
-		    mysqli_query($con, $update_status);	
+		    mysqli_query($con, $update_status);
 
 		    echo "<meta http-equiv='refresh' content='0;url=mylistings.php'>";
 
 		}
 
 
-
 }
-echo "</td>"; 
-echo "<td>"; 
+}
+else {
+  echo "No interested parties yet";
+}
+echo "</td>";
+echo "<td>";
 ?>
 
 <a href='edit.php?edit=<?php echo $row['ID'];?>'>edit</a>
 
   <?php
+echo "</td>";
+
+echo "<td>";
+?>
+<form action = "mylistings.php" method = "post">
+<!-- <input type="hidden" name="delete_rec_id" value="<?php print $postid; ?>"/>  -->
+<input type= "submit" value="Delete" name= "<?php echo $postid;?>">
+</form>
+
+  <?php
+
+  if(isset($_POST[$postid])) {
+    $delq = mysqli_query($con, "DELETE FROM posttable WHERE ID='$postid'");
+    echo "<meta http-equiv='refresh' content='0;url=mylistings.php'>";
+  }
 echo "</td>";
 echo "</tr>";
 }

@@ -1,4 +1,4 @@
- <?php 
+ <?php
 session_start();
 require 'DBconfig/config.php';
 
@@ -7,7 +7,7 @@ if (isset($_GET['edit'])) {
 $id=$_GET['edit'];
 $result = mysqli_query($con,"SELECT * FROM posttable where ID='$id'");
 $row=mysqli_fetch_array($result);
-} 
+}
 
 if (isset($_POST['new_type']) or isset($_POST['new_description']) or isset($_POST['new_quantity']) or isset($_POST['new_expdate']) or isset($_POST['new_location']) or isset($_POST['new_time'])) {
 
@@ -35,7 +35,7 @@ if (isset($_POST['new_type']) or isset($_POST['new_description']) or isset($_POS
  </head>
 
  <body>
-
+<div class = "form">
  <form id = "createPost" action = "edit.php" class="myform" method="post">
   <input type="hidden" name="ID" value="<?php echo $row['ID'];?>"></br>
     <h3> Type of item: </h3>
@@ -58,6 +58,7 @@ if (isset($_POST['new_type']) or isset($_POST['new_description']) or isset($_POS
 <a href=homepage.php> <input type="button" id="btn" value="Back"/> </a>
 
 </form>
- 
+ </div>
+
  </body>
  </html>

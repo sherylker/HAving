@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require 'DBconfig/config.php';
  ?>
@@ -17,7 +17,7 @@ require 'DBconfig/config.php';
   <div class="form">
 
 
-  <?php 
+  <?php
       $email=$_SESSION['email'];
 
 	$result = mysqli_query($con,"SELECT * FROM posttable where email!='$email'");
@@ -49,25 +49,27 @@ echo "<td>" . $row['expdate'] . "</td>";
 echo "<td>" . $row['location'] . "</td>";
 echo "<td>" . $row['time'] . "</td>";
 echo "<td>"
-?> 
+?>
 
-    
+
   <form name="form" method="POST" action="listings.php">
   <input type = "number" class="inputvalues" name = "quantity_req" placeholder = "20" id="reqamount"> </br>
+  <input type = "text" class="inputvalues" name = "time_req" placeholder = "730pm" id="reqtime"> </br>
      <input type="submit"  value="Grab" name="<?php echo $tmp;?>">
    </form>
 
-    
+
     <?php
     echo "</td>";
 ?>
- 
+
 
 <?php
    if (isset($_POST[$tmp])) {
    	$quantity_req=$_POST['quantity_req'];
+    $time_req=$_POST['time_req'];
 	$query= "insert into requesttable (`supplier`, `requester`, `postid`, `quantity_req`,
-        `status`) values( '$supplier', '$requester', '$tmp', '$quantity_req', 'Pending')";
+        `status`, `time_req`) values( '$supplier', '$requester', '$tmp', '$quantity_req', 'Pending', '$time_req')";
     $query_run = mysqli_query($con, $query);
 	}
 ?>
@@ -83,7 +85,7 @@ mysqli_close($con);
 ?>
 
 	<br><br>
-  <a href=createpost.php> <input type="button" id="btn" value="Add a listing!"/> </a>          
+  <a href=createpost.php> <input type="button" id="btn" value="Add a listing!"/> </a>
   <a href=homepage.php> <input type="button" id="btn" value="Back"/> </a>
 
 

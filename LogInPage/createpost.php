@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require 'DBconfig/config.php';
 
@@ -56,6 +56,7 @@ require 'DBconfig/config.php';
 		$query= "insert into posttable (`type`, `description`, `quantity`, `expdate`,
         `location`, `time`, `email`) values( '$type', '$description', '$quantity', '$expdate', '$location', '$time', '$email')";
     $query_run = mysqli_query($con, $query);
+    //  echo "<meta http-equiv='refresh' content='0;url=listings.php'>";
 	}
 
 ?>
